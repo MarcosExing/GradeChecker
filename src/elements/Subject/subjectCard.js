@@ -28,8 +28,10 @@ export class SubjectCard {
         subjectCard.innerHTML = `
             <span id="${subjectId}-name">${subject.name}</span>
             <span id="${subjectId}-questionsQuantity">${subject.questionsQuantity}</span>
-            <button id="${subjectId}-card-edit-button" class="button-dark"><span class="fa fa-pen-to-square"></span></button>
-            <button id="${subjectId}-card-delete-button" class="button-dark button-hover__red"><span class="fa fa-trash"></span></button>
+            <div class="content">
+                <button id="${subjectId}-card-edit-button" class="button-dark"><span class="fa fa-pen-to-square"></span></button>
+                <button id="${subjectId}-card-delete-button" class="button-dark button-hover__red"><span class="fa fa-trash"></span></button>
+            </div>
         `;
 
         // Append the new card to the subjectsCard container.

@@ -29,9 +29,20 @@
 
     /* Spacing */
     gap: 10px;
-    padding: 5px 20px; 
+    padding: 10px 20px; 
 
     /* Appearance */
     background-color: var(--bg-color-extralight);
     border-radius: var(--box-round);
+}
+
+.subjects .content {
+    /* Display and Alignment */
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+
+    /* Spacing */
+    gap: 10px;
 }

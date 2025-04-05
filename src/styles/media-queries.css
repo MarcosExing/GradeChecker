@@ -9,3 +9,13 @@
         align-items: center;
     }
 }
+
+@media screen and (max-width: 379px) {
+    header .logo {
+        flex-direction: column !important;
+    }
+
+    .subjects .cards .card {
+        flex-direction: column !important;
+    }
+}
