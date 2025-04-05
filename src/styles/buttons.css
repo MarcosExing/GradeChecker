@@ -1,0 +1,73 @@
+/* Dark Button Styles */
+.button-dark {
+    /* Display and Alignment */
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+
+    /* Spacing */
+    padding: 15px;
+
+    /* Appearance */
+    background-color: var(--bg-color-extralight);
+    border: none;
+    border-radius: var(--box-round);
+    color: #ffff;
+
+    /* Behavior */
+    cursor: pointer;
+}
+
+.button-dark:hover {
+    /* Appearance */
+    background-color: var(--bg-color-superlight);
+}
+
+/* Light Button Styles */
+.button-dark__light {
+    /* Spacing */
+    padding: 15px;
+
+    /* Appearance */
+    background-color: var(--bg-color-superlight);
+    border: none;
+    border-radius: var(--box-round);
+    color: #ffff;
+
+    /* Behavior */
+    cursor: pointer;
+}
+
+.button-dark__light:hover {
+    /* Appearance */
+    background-color: var(--bg-color-ultralight);
+}
+
+/* Invisible Button Styles */
+.button-invisible {
+    /* Dimensions */
+    width: fit-content;
+
+    /* Spacing */
+    padding: 10px;
+
+    /* Appearance */
+    background-color: transparent;
+    border: none;
+    color: #ffff;
+
+    /* Behavior */
+    cursor: pointer;
+}
+
+/* Hover Effect for Red Color */
+.button-hover__red:hover {
+    /* Appearance */
+    color: #ff2d2d;
+}
+
+/* Margin Top Utility Class */
+.upper-space {
+    /* Spacing */
+    margin-top: 20px;
+}

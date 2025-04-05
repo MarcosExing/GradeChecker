@@ -1,0 +1,37 @@
+.subjects{
+    /*Display and Alignment */
+    display: flex;
+    flex-direction: column;
+
+    /* Spacing */
+    gap: 20px;
+}
+
+.subjects .cards{
+    /* Display and Alignment */
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+
+    /* Spacing */
+    gap: 10px;
+}
+
+.subjects .card{
+    /* Display and Alignment */
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+
+    /* Dimensions */
+    width: fit-content;
+
+    /* Spacing */
+    gap: 10px;
+    padding: 5px 20px; 
+
+    /* Appearance */
+    background-color: var(--bg-color-extralight);
+    border-radius: var(--box-round);
+}

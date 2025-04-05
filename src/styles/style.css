@@ -1,0 +1,132 @@
+/* Font Face */
+@font-face {
+    font-family: Open-Sans;
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url(../assets/fonts/Open_Sans/OpenSans-VariableFont_wdth.ttf);
+}
+
+/* General Body Styles */
+body {
+    /* Display and Alignment */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    /* Dimensions */
+    height: 100vh;
+
+    /* Spacing */
+    gap: 20px;
+    padding: 20px;
+
+    /* Appearance */
+    background-color: var(--bg-color);
+    color: var(--font-main-color);
+    font-family: var(--font-main);
+}
+
+/* Top Elements Container */
+.top-elements {
+    /* Display and Alignment */
+    display: flex;
+    flex-direction: column;
+
+    /* Spacing */
+    gap: 20px;
+}
+
+/* Header Styles */
+header {
+    /* Display and Alignment */
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+    /* Spacing */
+    gap: 20px;
+    padding: 20px;
+    margin-top: -20px;
+
+    /* Appearance */
+    background-color: var(--bg-color-light);
+    border-radius: var(--box-little-round);
+}
+
+header .logo {
+    /* Display and Alignment */
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+
+    /* Spacing */
+    gap: 10px;
+}
+
+header .logo img {
+    /* Dimensions */
+    width: 100px;
+}
+
+/* Main Content Styles */
+main {
+    /* Display and Alignment */
+    display: flex;
+    flex-direction: column;
+
+    /* Spacing */
+    gap: 20px;
+}
+
+main .input {
+    /* Display and Alignment */
+    display: flex;
+    flex-direction: column;
+
+    /* Spacing */
+    gap: 20px;
+
+    /* Appearance */
+    background-color: var(--bg-color-light);
+    border-radius: var(--box-little-round);
+}
+
+main .input form {
+    /* Display and Alignment */
+    display: flex;
+    flex-direction: column;
+
+    /* Spacing */
+    gap: 10px;
+}
+
+main .input .buttons {
+    /* Display and Alignment */
+    display: flex;
+    flex-direction: row;
+
+    /* Spacing */
+    gap: 5px;
+}
+
+/* Section Styles */
+section {
+    /* Spacing */
+    padding: 20px;
+}
+
+/* Footer Styles */
+footer {
+    /* Display and Alignment */
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+
+    /* Spacing */
+    gap: 10px;
+    padding: 10px;
+}

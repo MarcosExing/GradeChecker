@@ -1,0 +1,20 @@
+export const DOM_IDS = {
+    BTN_ADD_SUBJECT: 'btn-add-subject',
+    BTN_SAVE_SUBJECTS: 'btn-save-subjects',
+    BTN_LOAD_SUBJECTS: 'btn-load-subjects',
+    POPUP_ADD_SUBJECT: 'popup-add-subject',
+    POPUP_EDIT_SUBJECT: 'popup-edit-subject-card',
+    OVERLAY_ADD_SUBJECT: 'overlay-add-subject',
+    OVERLAY_EDIT_SUBJECT: 'overlay-edit-subject-card',
+    SUBJECTS_CARD: 'subjects-card',
+    FORM_CALCULATE_RESULT: 'form-calculate-result',
+    INPUT_STUDENT_ANSWERS: 'input-student-answers',
+    INPUT_CORRECT_ANSWERS: 'input-correct-answers',
+    POPUP_EDIT_QUESTION: 'popup-edit-question',
+    POPUP_EDIT_ALL_QUESTIONS: 'popup-edit-all-questions',
+    EDIT_ALL_QUESTIONS_CRITERIA: 'edit-all-questions-criteria',
+    EDIT_ALL_QUESTIONS_VALUE_1: 'edit-all-questions-criteria-value-1',
+    EDIT_ALL_QUESTIONS_VALUE_2: 'edit-all-questions-criteria-value-2',
+    EDIT_ALL_QUESTIONS_VALUE_3: 'edit-all-questions-criteria-value-3',
+    BTN_LOAD_RESULT_2: 'btn-load-result-2'
+};

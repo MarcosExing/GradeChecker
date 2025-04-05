@@ -1,0 +1,36 @@
+
+.mouse-popup {
+    /* Positioning */
+    position: fixed;
+
+    /* Display and Alignment */
+    display: flex;
+    flex-direction: column;
+
+    /* Dimensions */
+    width: fit-content;
+
+    /* Spacing */
+    gap: 10px;
+    padding: 20px;
+
+    /* Appearance */
+    background-color: var(--bg-color-extralight);
+    border-radius: var(--box-little-round);
+    font-weight: bold;
+
+    /* Transitions and Interaction */
+    transition: all ease 0.2s;
+    pointer-events: none;
+}
+
+.mouse-popup__description {
+    /* Display and Alignment */
+    display: flex;
+    flex-direction: column;
+
+    /* Text Styles */
+    font-weight: lighter;
+    font-size: 0.9rem;
+
+}

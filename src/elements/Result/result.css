@@ -1,0 +1,186 @@
+/* Result Container */
+.result {
+    /* Display and Alignment */
+    display: flex;
+    flex-direction: column;
+
+    /* Spacing */
+    gap: 20px;
+
+    /* Appearance */
+    background-color: var(--bg-color-light);
+    border-radius: var(--box-little-round);
+}
+
+
+/* Peformance Section */
+.result .performance {
+    /* Display and Alignment */
+    display: flex;
+    flex-direction: column;
+
+    /* Spacing */
+    gap: 20px;
+}
+
+.result .performance .title {
+    /* Spacing */
+    margin: -20px -20px 0 -20px;
+    padding: 10px;
+
+    /* Appearance */
+    background-color: #255C99;
+    border-radius: var(--box-little-round) var(--box-little-round) 0 0;
+    color: #ffff;
+}
+
+.result p {
+    /* Appearance */
+    font-size: var(--font-medium);
+}
+
+.result .performance .buttons {
+    /* Display and Alignment */
+    display: flex;
+    flex-direction: row;
+
+    /* Spacing */
+    gap: 10px;
+}
+
+
+/* Student Answers Section */
+.result .student-answers {
+    /* Display and Alignment */
+    display: flex;
+    flex-direction: column;
+    
+    /* Spacing */
+    gap: 40px;
+    padding: 10px;
+
+    /* Appearance */
+    background-color: var(--bg-color-light);
+    border-radius: var(--box-little-round);
+}
+
+.result .student-answers .title {
+    /* Spacing */
+    margin-left: -10px;
+
+    /* Appearance */
+    color: #ffff;
+}
+
+/* Subjects Cards */
+.result .student-answers .super-card {
+    /* Display and Alignment */
+    display: flex;
+    flex-direction: column;
+
+    /* Spacing */
+    gap: 20px;
+}
+
+/* Questions Cards */
+.result .student-answers .cards {
+    /* Display and Alignment */
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(100px, 180px));
+
+    /* Spacing */
+    gap: 10px;
+}
+
+/* Individual Answer Card */
+.result .student-answers .card {
+    /* Display and Alignment */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    
+    /* Spacing */
+    gap: 20px;
+    padding: 20px 10px;
+
+    /* Appearance */
+    background-color: var(--bg-color-extralight);
+    border-radius: var(--box-little-round);
+}
+
+.result .student-answers .card .card-content {
+    /* Display and Alignment */
+    display: flex;
+    flex-direction: column;
+
+    /* Spacing */
+    gap: 5px;
+}
+
+/* Correct/Incorrect Card Styling */
+.correct {
+    /* Appearance */
+    border: 2px solid #412bff;
+}
+
+.incorrect {
+    /* Appearance */
+    border: 2px solid #ff2121;
+}
+
+/* Card Button */
+.result .student-answers .card button {
+    /* Positioning and Layering */
+    position: relative;
+    top: -45px;
+
+    /* Dimensions */
+    width: 150px;
+
+    /* Spacing */
+    padding: 10px;
+    margin-bottom: -50px;
+
+    /* Appearance */
+    background-color: var(--bg-color-evenlight);
+    border-radius: var(--box-round);
+    color: #ffff;
+    opacity: 0;
+
+    /* Behavior */
+    cursor: pointer;
+    transition: all ease 0.2s;
+}
+
+.result .student-answers .card:hover button {
+    /* Appearance */
+    opacity: 1;
+    transform: translateY(-20px);
+}
+
+.card button:hover {
+    /* Appearance */
+    background-color: var(--bg-color-superlight);
+}
+
+
+/* Result Buttons */
+.result .buttons {
+    /* Display and Alignment */
+    display: flex;
+    flex-direction: column;
+
+    /* Spacing */
+    gap: 10px;
+}
+
+.result .buttons .header {
+    /* Display and Alignment */
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+
+    /* Spacing */
+    gap: 10px;
+}

@@ -1,0 +1,57 @@
+
+.overlay-notification-popup {
+    /* Positioning and Layering */
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+
+    /* Display and Alignment */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    /* Dimensions */
+    width: 100%;
+    height: 10%;
+
+    /* Spacing */
+    padding: 20px;
+}
+
+.notification-popup {
+    /* Positioning and Layering */
+    position: sticky;
+    z-index: 1001;
+
+    /* Display and Alignment */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    /* Dimensions */
+    width: 100%;
+    height: fit-content;
+
+    /* Appearance */
+    border-radius: var(--box-little-round);
+    padding: 20px 40px;
+    font-weight: bold;
+}
+
+/* Notification State Styles */
+.success {
+    /* Appearance */
+    background-color: #1b1be7;
+}
+
+.error {
+    /* Appearance */
+    background-color: #b30606;
+}
+
+.warning {
+    /* Appearance and Text */
+    background-color: #dee204;
+    color: #000;
+}

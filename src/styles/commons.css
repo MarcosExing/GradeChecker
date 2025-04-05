@@ -1,0 +1,46 @@
+/* Strong Text Styles */
+strong {
+    /* Appearance */
+    font-weight: bold;
+}
+
+.strong-blue {
+    /* Appearance */
+    color: #8a8aff;
+    font-weight: bold;
+}
+
+.strong-green {
+    /* Appearance */
+    color: #5ec75e;
+    font-weight: bold;
+}
+
+.strong-red {
+    /* Appearance */
+    color: #ff2d2d;
+    font-weight: bold;
+}
+
+/* Hide Display */
+.hide {
+    /* Display */
+    display: none !important;
+}
+
+/* Margin Bottom Utility Class */
+.bottom-space {
+    /* Spacing */
+    margin-bottom: 20px;
+}
+
+/* Stamp Style */
+.stamp {
+    /* Spacing */
+    padding: 10px;
+
+    /* Appearance */
+    background-color: var(--bg-color-superlight);
+    border-radius: var(--box-round);
+    color: #ffff;
+}

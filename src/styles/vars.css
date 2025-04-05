@@ -1,0 +1,29 @@
+:root{
+    /* FONT */
+    --font-main: "Open-Sans", sans-serif;
+
+    /* COLORS */
+    --font-main-color: #ffffffe5;
+    --font-main-second-color: #000000;
+    --bg-color: #171717;
+    --bg-color-light: #1d1d1d;
+    --bg-color-extralight: #252525;
+    --bg-color-evenlight: #303030;
+    --bg-color-superlight: #353535;
+    --bg-color-ultralight: #4a4a4a;
+    --bg-color-ultralight2: #555555;
+    --bg-color-ultralight3: #5f5f5f;
+
+    /* BORDER */
+    --box-little-round: 8px;
+    --box-round: 25px;
+    --box-extraround: 50px;
+
+    /* SIZE */
+    --font-small: 1rem;
+    --font-medium: 1.3rem;
+    --font-big: 4rem;
+    --font-extra-big: 8rem;
+    --icon-small: 18px;
+    --icon-medium: 25px;
+}

@@ -1,0 +1,122 @@
+/* Reset CSS */
+
+/* Box-sizing border-box por padrão para todos os elementos */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* Removendo border de button */
+button{
+  border-style: none;
+}
+
+/* Remover margens e preenchimentos padrão */
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+dl,
+dd,
+ol,
+ul,
+figure,
+fieldset,
+legend {
+  margin: 0;
+  padding: 0;
+}
+
+/* Definir altura e largura padrão para elementos de bloco */
+html,
+body,
+div,
+article,
+section,
+main,
+nav,
+aside,
+header,
+footer,
+address,
+figure,
+figcaption,
+blockquote,
+dd,
+dl,
+dt,
+fieldset,
+form,
+legend,
+ol,
+ul,
+li,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+pre {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+/* Normalizar estilos de texto */
+body,
+button,
+input,
+select,
+textarea {
+  font-family: inherit;
+  font-size: 100%;
+  line-height: 1.15;
+}
+
+/* Remover espaçamento de texto no IE 11 */
+button,
+input,
+select,
+textarea {
+  margin: 0;
+}
+
+/* Remover contorno ao redor de elementos vinculados no IE 11 */
+a {
+  background-color: transparent;
+}
+
+/* Estilos de lista removem estilos padrão (margem e estilo de lista) */
+ol,
+ul {
+  list-style: none;
+}
+
+/* Remover decoração de texto sublinhada para links */
+a {
+  text-decoration: none;
+}
+
+/* Remover decoração de lista em navegadores WebKit/Gecko */
+ol,
+ul {
+  list-style: none;
+}
+
+/* Definir estilo de fonte padrão */
+body {
+  font-family: sans-serif;
+}
+
+/* Opcional: adicionar mais estilos conforme necessário */
+
+/* Fim do Reset CSS */

@@ -1,0 +1,69 @@
+
+.overlay {
+    /* Positioning and Layering */
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+
+    /* Display and Alignment */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    /* Dimensions */
+    width: 100%;
+    height: 100%;
+
+    /* Spacing */
+    padding: 20px;
+
+    /* Appearance */
+    background-color: rgba(0, 0, 0, 0.3);
+}
+
+.form-popup {
+    /* Positioning and Layering */
+    position: sticky;
+    z-index: 1001;
+
+    /* Dimensions */
+    width: fit-content;
+    height: fit-content;
+
+    /* Appearance */
+    background-color: var(--bg-color-extralight);
+    border-radius: var(--box-round);
+    padding: 20px;
+
+    /* Shadow */
+    box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.25);
+}
+
+.form-popup-header {
+    /* Display and Alignment */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    /* Spacing */
+    margin-bottom: 10px;
+}
+
+.form-popup-content {
+    /* Display and Alignment */
+    display: flex;
+    flex-direction: column;
+
+    /* Spacing */
+    gap: 20px;
+}
+
+.form-popup-body form {
+    /* Display and Alignment */
+    display: flex;
+    flex-direction: column;
+
+    /* Spacing */
+    gap: 15px;
+}

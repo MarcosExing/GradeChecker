@@ -1,0 +1,76 @@
+/* Number Input Styling */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+    /* Appearance */
+    display: none;
+}
+
+/* Dark Input Styles */
+.input-dark {
+    /* Spacing */
+    padding: 10px;
+
+    /* Appearance */
+    background-color: var(--bg-color-extralight);
+    border: none;
+    border-radius: var(--box-round);
+    color: #ffff;
+
+    /* Behavior */
+    cursor: text;
+}
+
+/* Light Input Styles */
+.input-dark__light {
+    /* Spacing */
+    padding: 10px;
+
+    /* Appearance */
+    background-color: var(--bg-color-superlight);
+    border: none;
+    border-radius: var(--box-round);
+    color: #ffff;
+
+    /* Behavior */
+    cursor: text;
+}
+
+/* Dark Select Styles */
+.select-dark {
+    /* Spacing */
+    padding: 10px;
+
+    /* Appearance */
+    background-color: var(--bg-color-extralight);
+    border: none;
+    border-radius: var(--box-round);
+    color: #ffff;
+
+    /* Behavior */
+    cursor: pointer;
+}
+
+.select-dark:hover {
+    /* Appearance */
+    background-color: var(--bg-color-superlight);
+}
+
+/* Light Select Styles */
+.select-dark__light {
+    /* Spacing */
+    padding: 10px;
+
+    /* Appearance */
+    background-color: var(--bg-color-superlight);
+    border: none;
+    border-radius: var(--box-round);
+    color: #ffff;
+
+    /* Behavior */
+    cursor: pointer;
+}
+
+.select-dark__light:hover {
+    /* Appearance */
+    background-color: var(--bg-color-ultralight);
+}
