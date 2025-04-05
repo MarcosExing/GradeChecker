@@ -7,7 +7,14 @@ export function createDonutGraph(labels, colors, values, title, divId) {
         font: {
             color: colors["textColor"]
         },
-        showlegend: false
+        showlegend: false,
+        margin: {
+            l: 20,
+            r: 20,
+            b: 20,
+            t: 90,
+            pad: 4
+        }
     };
 
     const plotColors = labels.map(label => colors[label] || '#fff');
