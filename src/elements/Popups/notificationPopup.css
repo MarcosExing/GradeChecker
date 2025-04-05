@@ -13,7 +13,7 @@
 
     /* Dimensions */
     width: 100%;
-    height: 10%;
+    height: fit-content;
 
     /* Spacing */
     padding: 20px;
