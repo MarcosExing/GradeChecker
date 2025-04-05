@@ -1,7 +1,7 @@
 import { Result } from "./result.js";
 import { QuestionController } from "../Question/questionController.js";
 import { ResultView } from "./resultView.js";
-import { saveFile, loadFile } from "../../Utils/fileUtils.js";
+import { saveFile, loadFile } from "../../utils/fileUtils.js";
 import { NotificationPopup } from "../Popups/notificationPopup.js";
 
 /**
