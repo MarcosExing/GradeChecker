@@ -1,5 +1,5 @@
 import { getElementById } from "../../utils/domUtils.js";
-import { createDonutGraph } from "../../Utils/graphUtils.js";
+import { createDonutGraph } from "../../utils/graphUtils.js";
 
 /**
  * The ResultView class is responsible for rendering the result of a test or exam,

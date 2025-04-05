@@ -1,6 +1,6 @@
 import { Subject } from './subject.js';
 import { SubjectCard } from './subjectCard.js';
-import { saveFile, loadFile } from '../../Utils/fileUtils.js';
+import { saveFile, loadFile } from '../../utils/fileUtils.js';
 import { NotificationPopup } from '../Popups/notificationPopup.js';
 
 /**
