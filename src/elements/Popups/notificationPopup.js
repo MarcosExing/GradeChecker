@@ -25,7 +25,7 @@ export class NotificationPopup {
         /**
          * @type {number} - The amount of time (milliseconds) to read a word. 
          */
-        this.readWordTime = 70;
+        this.readWordTime = 80;
 
         // Check if another NotificationPopup is playing
         if (NotificationPopup.isNotificationActive) {
