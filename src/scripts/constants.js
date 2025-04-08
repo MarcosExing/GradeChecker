@@ -9,7 +9,7 @@ export const DOM_IDS = {
     SUBJECTS_CARD: 'subjects-card',
     FORM_CALCULATE_RESULT: 'form-calculate-result',
     INPUT_STUDENT_ANSWERS: 'input-student-answers',
-    INPUT_CORRECT_ANSWERS: 'input-correct-answers',
+    INPUT_CORRECT_ANSWERS: 'input-answer-key',
     POPUP_EDIT_QUESTION: 'popup-edit-question',
     POPUP_EDIT_ALL_QUESTIONS: 'popup-edit-all-questions',
     EDIT_ALL_QUESTIONS_CRITERIA: 'edit-all-questions-criteria',

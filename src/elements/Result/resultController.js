@@ -43,7 +43,7 @@ export class ResultController {
          *                      main: HTMLElement, // The main container element.
          *                      editQuestionPopup: FormPopup, // The popup for editing questions.
          *                      inputStudentAnswers: HTMLInputElement, // The input for student answers.
-         *                      inputCorrectAnswers: HTMLInputElement // The input for correct answers.
+         *                      inputAnswerKey: HTMLInputElement // The input for answer key.
          *                  }
          */
         this.htmlElements = htmlElements;
@@ -69,22 +69,22 @@ export class ResultController {
     }
 
     /**
-     * Adds a result based on student and correct answers provided as input strings.
+     * Adds a result based on student and answer key provided as input strings.
      * @param {string} studentAnswers - A string of student answers (e.g., "AAABBCCDDEE").
-     * @param {string} correctAnswers - A string of correct answers (e.g., "AAACCDDEECC").
+     * @param {string} answerKey - A string of answer key (e.g., "AAACCDDEECC").
      */
-    addResultFromInput(studentAnswers, correctAnswers) {
+    addResultFromInput(studentAnswers, answerKey) {
         // Delete any existing result.
-        this.deleteResult();
+        this.deleteResult(false);
         // The total number of questions across all subjects.
         let subjectsQuestions = this.subjectController.getSubjectsQuestionsQuantity(this.subjectController.subjects);
         // Remove any spaces from the input strings.
         studentAnswers = studentAnswers.replaceAll(" ", "");
-        correctAnswers = correctAnswers.replaceAll(" ", "");
+        answerKey = answerKey.replaceAll(" ", "");
 
-        // Check if the number of student answers matches the number of correct answers.
-        if (studentAnswers.length != correctAnswers.length) {
-            window.alert(this.translations.windowAlertUnmatchedAnswers + " " + studentAnswers.length + " " + correctAnswers.length);
+        // Check if the number of student answers matches the number of answer key.
+        if (studentAnswers.length != answerKey.length) {
+            window.alert(this.translations.windowAlertUnmatchedAnswers + " " + studentAnswers.length + " " + answerKey.length);
             return;
         }
         
@@ -102,7 +102,7 @@ export class ResultController {
 
         // Add each question to the question controller.
         for (let i = 0; i < studentAnswers.length; i++) {
-            this.questionController.addQuestion([`${this.translations.question} ${i+1}`, studentAnswers[i], correctAnswers[i]]);
+            this.questionController.addQuestion([`${this.translations.question} ${i+1}`, studentAnswers[i], answerKey[i]]);
         }
         this.questionCards = Array.from(this.questionController.questionsCard.childNodes); // questionsCard.childNodes is empty out after the assign
 
@@ -114,17 +114,23 @@ export class ResultController {
      * @param {Object} subjects - A object where keys are subject IDs and values are subject data arrays.
      *                           Each subject data array should be in the format: [name, questionsQuantity, questionType, questionValue, wrongPenalty] 
      * @param {Object} questions - An object where keys are question IDs and values are question data arrays.
-     *                            Each question data array should be in the format: [name, studentAnswer, correctAnswer, difficulty].
+     *                            Each question data array should be in the format: [name, studentAnswer, answerKey, difficulty].
      */
     addResultFromObjects(subjects, questions) {
+
         // Delete any existing result.
-        this.deleteResult();
+        this.deleteResult(false);
         // Delete any existing subjects.
         this.subjectController.deleteSubjects();
         
+        // If there are no subjects or questions, return early.
+        if(Object.values(subjects).length === 0 && Object.values(questions).length === 0) {
+            return;
+        }
+
         // Adds a generic subject if dons't exist
         if (Object.values(subjects).length === 0) {
-            this.subjectController.addGenericSubject(Object.values(this.questionController.questions).length);
+            this.subjectController.addGenericSubject(Object.values(questions).length, false);
         }
         else {
             // Add each subject from the loaded data.
@@ -132,12 +138,17 @@ export class ResultController {
                 if (subject.isGeneric) {
                     subject.name = this.translations.genericSubject;
                 }
-                this.subjectController.addSubject(Array.from(Object.values(subject)));
+                this.subjectController.addSubject(Array.from(Object.values(subject)), false);
             }
         }
 
-        let subjectsQuestions = this.subjectController.getSubjectsQuestionsQuantity(subjects);
+        let subjectsQuestions = this.subjectController.getSubjectsQuestionsQuantity(this.subjectController.subjects);
         let questionsQuantity = this.questionController.getQuestionsQuantity(questions);
+
+        if (questionsQuantity == 0) {
+            return;
+        }
+
         if (subjectsQuestions != questionsQuantity) {
             window.alert(this.translations.windowAlertUnmatchedAnswersWithQuestions + " " + subjectsQuestions + " " + questionsQuantity);
             return;
@@ -154,6 +165,7 @@ export class ResultController {
         }
         this.questionCards = Array.from(this.questionController.questionsCard.childNodes); // questionsCard.childNodes is empty out after the assign
 
+        this.loadInputs(Object.values(questions));
         this.#addResult(false);
     }
 
@@ -179,15 +191,32 @@ export class ResultController {
      * Edits the current result, recalculates it, and updates the view.
      */
     editResult() {
-        this.resultView.deleteView();
-        this.#addResult(false);
+        this.addResultFromObjects(this.subjectController.subjectsCopy, this.questionController.questionsCopy);
         new NotificationPopup(this.translations.resultRecalculated, "success");
+    }
+
+    /**
+     * Edit the question and updates the result.
+     * @param {Array} data - An array containing the updated question data: [name, studentAnswer, answerKey, difficulty]. 
+     */
+    editQuestion(data) {
+        this.questionController.editQuestion(data, true);
+        this.addResultFromObjects(this.subjectController.subjectsCopy, this.questionController.questionsCopy);
+    }
+
+    /**
+     * Edits all questions with the criteria and updates de result.
+     * @param {Array} data - An array containing the edit parameters: [studentAnswer, answerKey, difficulty, criteria, criteriaValue]. 
+     */
+    editAllQuestions(data) {
+        this.questionController.editAllQuestions(data, true);
+        this.addResultFromObjects(this.subjectController.subjectsCopy, this.questionController.questionsCopy);
     }
 
     /**
      * Deletes the current result and removes the corresponding UI elements.
      */
-    deleteResult() {
+    deleteResult(cleanInputs = true) {
         // If there are no questions, return early.
         if(this.questionController.questions === null) return;
 
@@ -197,6 +226,35 @@ export class ResultController {
         }
 
         this.resultView.deleteView();
+        if (cleanInputs) this.loadInputs([]);
+    }
+
+    /**
+     * Deletes the target question and decrease the subject questions quantity or deletes the subject.
+     */ 
+    deleteQuestion(subjectId, questionId) {
+        // If is the last question, delete all result
+        if (this.questionController.getQuestionsQuantity(this.questionController.questions) === 1) {
+            resultController.deleteResult();
+            this.subjectController.deleteSubjects();
+
+            return;
+        }
+
+        // Delete the subject if is the last question of it
+        else if (this.subjectController.getSubject(subjectId).questionsQuantity === 1) {
+            this.questionController.deleteQuestion(questionId);
+            this.subjectController.deleteSubject(subjectId);
+
+            this.addResultFromObjects(this.subjectController.subjectsCopy, this.questionController.questionsCopy);
+
+            return;
+        }
+
+        this.questionController.deleteQuestion(questionId);
+        this.subjectController.getSubject(subjectId).questionsQuantity -= 1;
+
+        this.addResultFromObjects(this.subjectController.subjectsCopy, this.questionController.questionsCopy);
     }
 
     /**
@@ -222,7 +280,7 @@ export class ResultController {
      */
     async loadResult() {
         let studentAnswers = [];
-        let correctAnswers = [];
+        let answerKey = [];
 
         try {
             var fileContent = await loadFile(".json");
@@ -234,8 +292,6 @@ export class ResultController {
             return; // Exit the function if there's an error
         }
 
-        // Update the input fields with the loaded answers.
-        this.loadInputs(Object.values(data.questions));
         // Add the result based on the loaded subjects and questions.
         this.addResultFromObjects(data.subjects, data.questions);
 
@@ -251,24 +307,29 @@ export class ResultController {
 
         if (questions !== null) {
             this.loadInputs(Object.values(questions));
+        }
+
+        if (subjects !== null) {
             this.addResultFromObjects(subjects, questions);
         }
     }
 
     /**
-     * Loads the student answers and correct answers inputs with the questions objects
-     * @param {Array} questions - A array of questions objects with at least: [studentAnswer] and [correctAnswer] attributes. 
+     * Loads the student answers and answer key inputs with the questions objects
+     * @param {Array} questions - A array of questions objects with at least: [studentAnswer] and [answerKey] attributes. 
      */
     loadInputs(questions) {
         let studentAnswers = [];
-        let correctAnswers = [];
+        let answerKey = [];
 
-        for (let question of questions) {
-            studentAnswers.push(question.studentAnswer);
-            correctAnswers.push(question.correctAnswer);
+        if(questions.length !== 0) {
+            for (let question of questions) {
+                studentAnswers.push(question.studentAnswer);
+                answerKey.push(question.answerKey);
+            }
         }
 
         this.htmlElements.inputStudentAnswers.value = studentAnswers.join("");
-        this.htmlElements.inputCorrectAnswers.value = correctAnswers.join("");
+        this.htmlElements.inputAnswerKey.value = answerKey.join("");
     }
 }

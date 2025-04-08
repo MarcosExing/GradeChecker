@@ -31,7 +31,7 @@
             </div>
             <select id="language-select" class="select-dark">
                 <option value="en">English</option>
-                <option value="pt-BR">Portuguese (BR)</option>
+                <option value="pt-BR">Português (BR)</option>
             </select>
         </header>
         <main>
@@ -50,8 +50,10 @@
                 </div>
                 <h2 data-translate-key="answers">Answers</h2>
                 <form id="form-calculate-result">
+                    <span data-translate-key="studentAnswers">Student Answers</span>
                     <input id="input-student-answers" class="input-dark" type="text" data-translate-key="studentAnswersInput" placeholder="Type the student answers. Ex: AAABBCCDDEE" required>
-                    <input id="input-correct-answers" class="input-dark" type="text" data-translate-key="correctAnswersInput" placeholder="Type the correct answers. Ex: AAACCDDEECC" required>
+                    <span data-translate-key="examAnswerKey">Exam Answer Key</span>
+                    <input id="input-answer-key" class="input-dark" type="text" data-translate-key="answerKeyInput" placeholder="Type the answer key. Ex: AAACCDDEECC" required>
                     <button id="btn-calculate-result" class="button-dark upper-space" data-translate-key="calculate">Calculate</button>
                 </form>
                 <button id="btn-load-result-2" class="button-dark" data-translate-key="loadResult">Load Result</button>
@@ -129,8 +131,8 @@
                                 <input class="input-dark__light" type="text" required>
                                 <span data-translate-key="studentAnswer">Student Answer</span>
                                 <input class="input-dark__light" type="text" data-translate-key="studentAnswerInput" placeholder="Type the student answer" required>
-                                <span data-translate-key="correctAnswer">Correct Answer</span>
-                                <input class="input-dark__light" type="text" data-translate-key="correctAnswerInput" placeholder="Type the correct answer" required>
+                                <span data-translate-key="answerKey">Correct Answer</span>
+                                <input class="input-dark__light" type="text" data-translate-key="answerKeyInput" placeholder="Type the answer key" required>
                                 <span data-translate-key="difficulty">Difficulty</span>
                                 <select class="select-dark__light" required>
                                     <option value="easy" data-translate-key="easy">Easy</option>
@@ -161,7 +163,7 @@
                                     <option value="true" data-translate-key="makeRight">Make Right</option>
                                     <option value="false" data-translate-key="makeWrong">Make Wrong</option>
                                 </select>
-                                <span data-translate-key="correctAnswer">Correct Answer</span>
+                                <span data-translate-key="answerKey">Correct Answer</span>
                                 <select class="select-dark__light">
                                     <option value="" data-translate-key="keep">Same</option>
                                     <option value="_" data-translate-key="makeNull">Make Null</option>
@@ -177,7 +179,7 @@
                                 <span data-translate-key="criteria">Criteria</span>
                                 <select id="edit-all-questions-criteria" class="select-dark__light" required>
                                     <option value="studentAnswer" data-translate-key="studentAnswer">Student Answer</option>
-                                    <option value="correctAnswer" data-translate-key="correctAnswer">Correct Answer</option>
+                                    <option value="answerKey" data-translate-key="answerKey">Correct Answer</option>
                                     <option value="difficulty" data-translate-key="difficulty">Difficulty</option>
                                 </select>
                                 <span data-translate-key="criteriaValue">Criteria Value</span>

@@ -1,3 +1,4 @@
+import { NotificationPopup } from "../Popups/notificationPopup.js";
 import { Question } from "./question.js";
 import { QuestionCard } from "./questionCard.js";
 
@@ -16,6 +17,11 @@ export class QuestionController {
          * @type {Object.<string, Question>} - An object to store the questions, keyed by their unique IDs.
          */
         this.questions = {};
+        /**
+         * @type {Object.<string, Question>} - A copy of the questions object.
+         * @private
+         */
+        this._questionsCopy = {};
         /**
          * @type {Number} - The total number of questions
          * @private
@@ -44,8 +50,17 @@ export class QuestionController {
     }
 
     /**
+     * @type {Object.<string, Question>} - A copy of the questions object.
+     */
+    get questionsCopy() {
+        this._questionsCopy = JSON.parse(JSON.stringify(this.questions));
+
+        return this._questionsCopy;
+    }
+
+    /**
      * Adds a new question to the collection and creates a corresponding card in the UI.
-     * @param {Array} data - An array containing the question's data: [name, studentAnswer, correctAnswer, difficulty].
+     * @param {Array} data - An array containing the question's data: [name, studentAnswer, answerKey, difficulty].
      */
     addQuestion(data) {
         // Generate a unique ID for the new question.
@@ -61,9 +76,9 @@ export class QuestionController {
 
     /**
      * Edits an existing question in the collection and updates its card in the UI.
-     * @param {Array} data - An array containing the updated question data: [name, studentAnswer, correctAnswer, difficulty].
+     * @param {Array} data - An array containing the updated question data: [name, studentAnswer, answerKey, difficulty].
      */
-    editQuestion(data) {
+    editQuestion(data, showNotification = true) {
         // If has a different name of the generic one, changes the flag
         let isGenericName = null;
         let questionName = data[0].split(" ")[0]; // Removes the counter.
@@ -76,21 +91,23 @@ export class QuestionController {
         this.saveQuestionsToLocalStorage();
         // Update the question's card in the UI.
         QuestionCard.editCard(this.getQuestion(this.currentQuestionId), this.currentQuestionId);
+
+        if(showNotification) new NotificationPopup(this.translations.editQuestionNotificationPopup, "success");
     }
 
     /**
      * Edits multiple questions based on specified criteria and values.
-     * @param {Array} data - An array containing the edit parameters: [studentAnswer, correctAnswer, difficulty, criteria, criteriaValue].
+     * @param {Array} data - An array containing the edit parameters: [studentAnswer, answerKey, difficulty, criteria, criteriaValue].
      *                       - studentAnswer: The new student answer value (or "" to keep the same).
-     *                       - correctAnswer: The new correct answer value (or "" to keep the same).
+     *                       - answerKey: The new answer key value (or "" to keep the same).
      *                       - difficulty: The new difficulty value (or "" to keep the same).
-     *                       - criteria: The criteria to filter questions by (e.g., "studentAnswer", "correctAnswer", "difficulty").
+     *                       - criteria: The criteria to filter questions by (e.g., "studentAnswer", "answerKey", "difficulty").
      *                       - criteriaValue: The value to match against the criteria.
      */
-    editAllQuestions(data) {
+    editAllQuestions(data, showNotification = true) {
         // Extract the edit parameters from the data array.
         const studentAnswer = data[0];
-        const correctAnswer = data[1];
+        const answerKey = data[1];
         const difficulty = data[2];
         const criteria = data[3];
         const criteriaValue = data[4];
@@ -116,9 +133,9 @@ export class QuestionController {
                             break;
                     }
                     break;
-                case "correctAnswer":
-                    // Check if the question's correct answer matches the criteria value.
-                    if (questionClone.correctAnswer != criteriaValue) continue;
+                case "answerKey":
+                    // Check if the question's answer key matches the criteria value.
+                    if (questionClone.answerKey != criteriaValue) continue;
                     break;
                 case "difficulty":
                     // Check if the question's difficulty matches the criteria value.
@@ -130,8 +147,8 @@ export class QuestionController {
             if (studentAnswer != "") {
                 switch(studentAnswer) {
                     case "true": 
-                        // Set the student answer to the correct answer.
-                        questionClone.studentAnswer = question.correctAnswer;
+                        // Set the student answer to the answer key.
+                        questionClone.studentAnswer = question.answerKey;
                         break;
                     case "false":
                         // Set the student answer to a wrong answer.
@@ -143,9 +160,9 @@ export class QuestionController {
                         break;
                 }
             }
-            if (correctAnswer === "_") {
-                // Set the correct answer to null.
-                questionClone.correctAnswer = "_";
+            if (answerKey === "_") {
+                // Set the answer key to null.
+                questionClone.answerKey = "_";
             }
             if (difficulty != "") {
                 // Set the difficulty to the new value.
@@ -154,8 +171,10 @@ export class QuestionController {
             
             // Update the question with the modified data.
             this.currentQuestionId = id;
-            this.editQuestion(Array.from(Object.values(questionClone)));
+            this.editQuestion(Array.from(Object.values(questionClone)), false);
+
         }
+        if(showNotification) new NotificationPopup(this.translations.editAllQuestionsNotificationPopup, "success");
     }
 
     /**
@@ -165,6 +184,7 @@ export class QuestionController {
     deleteQuestion(questionId) {
         // Remove the question from the collection.
         delete this.questions[questionId];
+        this.saveQuestionsToLocalStorage();
         // Remove the question's card from the UI.
         QuestionCard.deleteCard(questionId);
     }

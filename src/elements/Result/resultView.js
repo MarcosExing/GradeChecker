@@ -82,6 +82,7 @@ export class ResultView {
         for (let [key, subject] of Object.entries(subjects)) {
             // Create a container for the subject's performance.
             const superCard = document.createElement('div');
+            superCard.id = `${key}-super-card`;
             superCard.classList.add('super-card');
             // Set the inner HTML of the subject's performance container.
             superCard.innerHTML = `
@@ -113,9 +114,9 @@ export class ResultView {
         // Set the inner HTML of the buttons container.
         this.buttons.innerHTML = `
             <div class="header">
+                <button id="btn-delete-allQuestions" class="button-dark">${this.translations.deleteAll} <span class="fa fa-trash"></span> </button>
                 <button id="btn-edit-allQuestions" class="button-dark">${this.translations.editAll} <span class="fa fa-pen-to-square"></span> </button>
             </div>
-            <button id="btn-recalculateResult" class="button-dark">${this.translations.recalculateResult}</button>
         `;
         // Append the buttons container to the result view container.
         this.resultView.appendChild(this.buttons);
@@ -181,7 +182,7 @@ export class ResultView {
      */
     addEventListeners(htmlElements, questionController, resultController) {
         // Add event listeners for editing individual questions.
-        this.addStudentAnswersEventListener(htmlElements.editQuestionPopup, questionController);
+        this.addStudentAnswersEventListener(htmlElements.editQuestionPopup, questionController, resultController);
         // Add event listeners for editing all questions and recalculating the result.
         this.addButtonsEventListener(htmlElements.editAllQuestionsPopup, resultController);
         // Add event listener for saving the result.
@@ -195,7 +196,7 @@ export class ResultView {
      * @param {FormPopup} editPopup - The popup used for editing question details.
      * @param {QuestionController} questionController - The controller for managing questions.
      */
-    addStudentAnswersEventListener(editPopup, questionController) {
+    addStudentAnswersEventListener(editPopup, questionController, resultController) {
         // Add a click event listener to the student answers container.
         this.studentAnswers.addEventListener('click', (event) => {
             // Check if the clicked element or its parent is a button.
@@ -213,11 +214,22 @@ export class ResultView {
                 // Get the question data from the question controller.
                 const question = questionController.getQuestion(questionId);
                 // Load the question data into the edit popup.
-                editPopup.loadPopupInputs([question.name, question.studentAnswer, question.correctAnswer, question.difficulty]);
+                editPopup.loadPopupInputs([question.name, question.studentAnswer, question.answerKey, question.difficulty]);
                 // Show the edit popup.
                 editPopup.togglePopupVisibility();
                 // Set the current question ID in the question controller.
                 questionController.currentQuestionId = questionId;
+            }
+            
+            if (button.id === `${questionId}-btn-delete`) {
+                // Check if the delete button is within a super-card
+                const superCard = questionCard.closest('.super-card');
+                if (!superCard) return;
+            
+                // Get the subject ID from the subject super-card
+                const subjectId = superCard.id.split("-")[0];
+
+                resultController.deleteQuestion(subjectId, questionId);
             }
         });
     }
@@ -239,10 +251,9 @@ export class ResultView {
                 // Show the edit all questions popup.
                 editAllQuestionsPopup.togglePopupVisibility();
             }
-            // If the clicked button is the recalculate result button.
-            if (button.id === "btn-recalculateResult") {
-                // Recalculate the result.
-                resultController.editResult(); 
+            if (button.id === "btn-delete-allQuestions") {
+                // Delete all questions.
+                resultController.deleteResult();
             }
         });
     }

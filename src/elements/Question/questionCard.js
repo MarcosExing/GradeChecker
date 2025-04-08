@@ -85,13 +85,18 @@ export class QuestionCard {
     static #createCard(question, questionId) {
         // Create the HTML string for the question card.
         const questionCard = `
-            <button id="${questionId}-btn-edit"><span class="fa fa-pen-to-square"></span></button>
+            <div class="card-header">
+                <button id="${questionId}-btn-edit"><span class="fa fa-pen-to-square"></span></button>
+            </div>
             <h3 id="${questionId}-title">${question.name}</h3>
             <div class="card-content">
                 <span id="${questionId}-student-answer"><strong>${question.studentAnswer}</strong>: ${QuestionCard.translations.studentAnswer}</span>
-                <span id="${questionId}-correct-answer"><strong>${question.correctAnswer}</strong>: ${QuestionCard.translations.correctAnswer}</span>
+                <span id="${questionId}-answer-key"><strong>${question.answerKey}</strong>: ${QuestionCard.translations.answerKey}</span>
             </div>
             <span id="${questionId}-stamp-difficulty" class="stamp"><strong>${QuestionCard.translations[question.difficulty]}</strong></span>
+            <div class="card-footer">
+                <button id="${questionId}-btn-delete" class="button-dark button-hover__red"><span class="fa fa-trash"></span></button>
+            </div>
         `;
 
         // Return the HTML string.

@@ -53,7 +53,7 @@ class AppInitializer {
             editQuestionPopup: this.popups.editQuestion,
             editAllQuestionsPopup: this.popups.editAllQuestions,
             inputStudentAnswers: getElementById(DOM_IDS.INPUT_STUDENT_ANSWERS),
-            inputCorrectAnswers: getElementById(DOM_IDS.INPUT_CORRECT_ANSWERS)
+            inputAnswerKey: getElementById(DOM_IDS.INPUT_CORRECT_ANSWERS)
         }
         this.resultController = new ResultController(this.subjectController, htmlElements, translations);
         // If the result is saved on the local storage, loads it
@@ -65,9 +65,9 @@ class AppInitializer {
 
         this.popups.addSubject.setHandlers(this.subjectController.addSubject.bind(this.subjectController), true);
 
-        this.popups.editQuestion.setHandlers(this.resultController.questionController.editQuestion.bind(this.resultController.questionController));
+        this.popups.editQuestion.setHandlers(this.resultController.editQuestion.bind(this.resultController));
 
-        this.popups.editAllQuestions.setHandlers(this.resultController.questionController.editAllQuestions.bind(this.resultController.questionController), true);
+        this.popups.editAllQuestions.setHandlers(this.resultController.editAllQuestions.bind(this.resultController), true);
 
         // Show or hide elements based on the selected criteria in the editAllQuestions popup
         this.popups.editAllQuestions.showElementOnValues(getElementById(DOM_IDS.EDIT_ALL_QUESTIONS_CRITERIA), 
@@ -75,7 +75,7 @@ class AppInitializer {
         ["studentAnswer"]);
         this.popups.editAllQuestions.showElementOnValues(getElementById(DOM_IDS.EDIT_ALL_QUESTIONS_CRITERIA), 
         getElementById(DOM_IDS.EDIT_ALL_QUESTIONS_VALUE_2), 
-        ["correctAnswer"]);
+        ["answerKey"]);
         this.popups.editAllQuestions.showElementOnValues(getElementById(DOM_IDS.EDIT_ALL_QUESTIONS_CRITERIA), 
         getElementById(DOM_IDS.EDIT_ALL_QUESTIONS_VALUE_3), 
         ["difficulty"]);
@@ -107,7 +107,7 @@ class AppInitializer {
 
         // Mouse popups for input fields
         new MousePopup(getElementById(DOM_IDS.INPUT_STUDENT_ANSWERS), translations.mousePopupStudentAnswerTitle, translations.mousePopupStudentAnswerDescription);
-        new MousePopup(getElementById(DOM_IDS.INPUT_CORRECT_ANSWERS), translations.mousePopupCorrectAnswerTitle, translations.mousePopupCorrectAnswerDescription);
+        new MousePopup(getElementById(DOM_IDS.INPUT_CORRECT_ANSWERS), translations.mousePopupAnswerKeyTitle, translations.mousePopupAnswerKeyDescription);
 
         // Calculate result form submission event
         getElementById(DOM_IDS.FORM_CALCULATE_RESULT).addEventListener('submit', (event) => {

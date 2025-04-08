@@ -19,6 +19,11 @@ export class SubjectController {
          */
         this.subjects = {};
         /**
+         * @type {Object.<string, Subject>} - A copy of the subjects object.
+         * @private
+         */
+        this._subjectsCopy = {};
+        /**
          * @type {number} - The total number of questions across all subjects.
          * @private
          */
@@ -40,13 +45,22 @@ export class SubjectController {
          */
         SubjectCard.subjectsCard = subjectsCard;
     }
+
+    /**
+     * @type {Object.<string, Subject>} - A copy of the subjects object.
+     */
+    get subjectsCopy() {
+        this._subjectsCopy = JSON.parse(JSON.stringify(this.subjects));
+        
+        return this._subjectsCopy;
+    }
     
     /**
      * Adds a new subject to the collection and creates a corresponding card in the UI.
      * @param {Array} data - An array containing the subject's data: [name, questionsQuantity, questionType, questionValue, wrongPenalty].
      * @returns {string} The ID of the newly created subject.
     */
-   addSubject(data) {
+   addSubject(data, showNotification = true) {
         const subjectId = this.generateSubjectId();
         this.subjects[subjectId] = new Subject(data);
         this.saveSubjectsToLocalStorage();
@@ -55,6 +69,8 @@ export class SubjectController {
         SubjectCard.addSubjectCard(subjectId, this.getSubject(subjectId));
         // Add event listeners to the new subject card for editing and deleting.
         SubjectCard.addEventListeners(subjectId, this.getSubject(subjectId), this.editPopup, this);
+
+        if (showNotification) new NotificationPopup(this.translations.newSubjectNotificationPopup, "success");
         
         // Return the ID of the newly created subject.
         return subjectId;
@@ -64,24 +80,25 @@ export class SubjectController {
      * Adds a new generic subject to the collection and creates a corresponding card in the UI
      * @param {number} numberQuestions - The total number of questions 
      */
-    addGenericSubject(numberQuestions) {
+    addGenericSubject(numberQuestions, showNotification = true) {
         let isGeneric = true;
-        this.addSubject([this.translations.genericSubject, numberQuestions, "multiple", 1, 0, isGeneric]);
+        this.addSubject([this.translations.genericSubject, numberQuestions, "multiple", 1, 0, isGeneric], false);
 
-        new NotificationPopup(this.translations.genericSubjectNotificationPopup, "warning");
-        console.log(this.loadSubjectsFromLocalStorage());
+        if(showNotification) new NotificationPopup(this.translations.genericSubjectNotificationPopup, "warning");
     }
 
     /**
      * Edits an existing subject in the collection and updates its card in the UI.
      * @param {Array} data - An array containing the updated subject data: [name, questionsQuantity, questionType, questionValue, wrongPenalty].
      */
-    editSubject(data) {
+    editSubject(data, showNotification = true) {
         // Update the subject's data in the collection.
         this.subjects[this.currentEditId].update(data);
         this.saveSubjectsToLocalStorage();
         // Update the subject's card in the UI.
         SubjectCard.editSubjectCard(this.currentEditId, this.getSubject(this.currentEditId));
+
+        if(showNotification) new NotificationPopup(this.translations.editSubjectNotificationPopup, "success");
     }
 
     /**
@@ -94,6 +111,7 @@ export class SubjectController {
         
         // Remove the subject from the collection.
         delete this.subjects[subjectId];
+        this.saveSubjectsToLocalStorage();
         // Remove the subject's card from the UI.
         SubjectCard.deleteSubjectCard(subjectId);
     }
