@@ -94,6 +94,9 @@
 
 /* Individual Answer Card */
 .result .student-answers .card {
+    /* Positioning */
+    position: relative; /* Important: Creates positioning context for the buttons */
+
     /* Display and Alignment */
     display: flex;
     flex-direction: column;
@@ -130,17 +133,17 @@
 }
 
 /* Card Button */
-.result .student-answers .card button {
+.result .student-answers .card .card-header button {
     /* Positioning and Layering */
-    position: relative;
-    top: -45px;
+    position: absolute;
+    top: -25px;
+    left: 15px;
 
     /* Dimensions */
     width: 150px;
 
     /* Spacing */
     padding: 10px;
-    margin-bottom: -50px;
 
     /* Appearance */
     background-color: var(--bg-color-evenlight);
@@ -153,17 +156,35 @@
     transition: all ease 0.2s;
 }
 
-.result .student-answers .card:hover button {
+.result .student-answers .card:hover .card-header button {
     /* Appearance */
     opacity: 1;
+
+    /* Behavior */
     transform: translateY(-20px);
 }
 
-.card button:hover {
+.result .student-answers .card .card-header button:hover {
     /* Appearance */
     background-color: var(--bg-color-superlight);
 }
 
+.result .student-answers .card .card-footer button {
+    /* Position and layering */
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
+    
+    /* Appearance */
+    opacity: 0;
+    
+    /* Behavior */
+    transition: all ease 0.2s;
+}
+
+.result .student-answers .card:hover .card-footer button {
+    opacity: 1;
+}
 
 /* Result Buttons */
 .result .buttons {
@@ -179,7 +200,7 @@
     /* Display and Alignment */
     display: flex;
     flex-direction: row;
-    justify-content: flex-end;
+    justify-content: space-between;
 
     /* Spacing */
     gap: 10px;

@@ -55,6 +55,7 @@
     /* Appearance */
     background-color: transparent;
     border: none;
+    border-radius: var(--box-round);
     color: #ffff;
 
     /* Behavior */
