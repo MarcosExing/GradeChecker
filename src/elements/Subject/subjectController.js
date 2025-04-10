@@ -128,6 +128,7 @@ export class SubjectController {
         
         // Clear the subjects collection.
         this.subjects = {};
+        this.saveSubjectsToLocalStorage();
     }
     
     
