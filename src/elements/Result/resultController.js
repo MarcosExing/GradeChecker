@@ -235,7 +235,7 @@ export class ResultController {
     deleteQuestion(subjectId, questionId) {
         // If is the last question, delete all result
         if (this.questionController.getQuestionsQuantity(this.questionController.questions) === 1) {
-            resultController.deleteResult();
+            this.deleteResult();
             this.subjectController.deleteSubjects();
 
             return;
